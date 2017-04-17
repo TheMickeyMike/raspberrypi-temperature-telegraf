@@ -14,3 +14,4 @@ To get human readable cpu temperture divide it by 10000
 ```json
 {"cpu":54768, "gpu":54.8}
 ```
+<img src="http://i.imgur.com/tnenohv.png" width="700">
