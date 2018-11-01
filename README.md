@@ -14,9 +14,11 @@ Collect RaspberryPi CPU and GPU temperature with telegraf
    commands = [ "/opt/vc/bin/vcgencmd measure_temp" ]                                                                                                                                     name_override = "gpu_temperature"
    data_format = "grok"
    grok_patterns = ["%{NUMBER:value:float}"]
+
 ```
-2. ```sudo service telegraf restart```
-3. Run test ```telegraf -config /etc/telegraf/telegraf.conf -test```
+2. Add telegraf user to video group ```sudo usermod -G video telegraf```
+3. ```sudo service telegraf stop;sudo service telegraf start```
+4. Run test ```telegraf -config /etc/telegraf/telegraf.conf -test```
 
 ### Data format
 To get a human readable *cpu* temperature divide it by 1000 (in grafana use the math(/ 1000) function
