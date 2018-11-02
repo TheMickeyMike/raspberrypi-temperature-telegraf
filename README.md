@@ -1,7 +1,7 @@
 # raspberrypi-temperature-telegraf
 Collect RaspberryPi CPU and GPU temperature with telegraf
 
-### How to use
+### How to use (No script required :fire:)
 1. Add this to you telegraf.conf
 ```
 [[inputs.file]] 
@@ -10,15 +10,24 @@ Collect RaspberryPi CPU and GPU temperature with telegraf
   data_format = "value"
   data_type = "integer"
   
-[[inputs.exec]]                                                                                                                                                                       #   ## Commands array
-   commands = [ "/opt/vc/bin/vcgencmd measure_temp" ]                                                                                                                                     name_override = "gpu_temperature"
-   data_format = "grok"
-   grok_patterns = ["%{NUMBER:value:float}"]
+[[inputs.exec]]
+  commands = [ "/opt/vc/bin/vcgencmd measure_temp" ]
+  name_override = "gpu_temperature"
+  data_format = "grok"
+  grok_patterns = ["%{NUMBER:value:float}"]
 
 ```
 2. Add telegraf user to video group ```sudo usermod -G video telegraf```
 3. ```sudo service telegraf stop;sudo service telegraf start```
 4. Run test ```telegraf -config /etc/telegraf/telegraf.conf -test```
+
+### How to use (Old way)
+1. Copy ```telegraf_pi_temp.sh``` to ```/usr/local/bin/telegraf_pi_temp.sh```
+2. Modify file permissions ```chmod +x /usr/local/bin/telegraf_pi_temp.sh```
+3. Add ```telegraf``` user to video group ```sudo usermod -G video telegraf```
+4. ```sudo service telegraf restart``` or ```sudo reboot```
+5. Add to your telegraf.conf snippet from ```telegraf.conf```
+6. Run test ```telegraf -config /etc/telegraf/telegraf.conf -test```
 
 ### Data format
 To get a human readable *cpu* temperature divide it by 1000 (in grafana use the math(/ 1000) function
