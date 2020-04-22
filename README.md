@@ -17,14 +17,14 @@ Collect RaspberryPi CPU and GPU temperature with telegraf
   grok_patterns = ["%{NUMBER:value:float}"]
 
 ```
-2. Add telegraf user to video group ```sudo usermod -G video telegraf```
+2. Add telegraf user to video group ```sudo usermod -a -G video telegraf```
 3. ```sudo service telegraf stop;sudo service telegraf start```
 4. Run test ```telegraf -config /etc/telegraf/telegraf.conf -test```
 
 ### How to use (Old way)
 1. Copy ```telegraf_pi_temp.sh``` to ```/usr/local/bin/telegraf_pi_temp.sh```
 2. Modify file permissions ```chmod +x /usr/local/bin/telegraf_pi_temp.sh```
-3. Add ```telegraf``` user to video group ```sudo usermod -G video telegraf```
+3. Add ```telegraf``` user to video group ```sudo usermod -a -G video telegraf```
 4. ```sudo service telegraf restart``` or ```sudo reboot```
 5. Add to your telegraf.conf snippet from ```telegraf.conf```
 6. Run test ```telegraf -config /etc/telegraf/telegraf.conf -test```
