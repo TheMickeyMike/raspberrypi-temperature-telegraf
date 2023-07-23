@@ -2,8 +2,9 @@
 Collect RaspberryPi CPU and GPU temperature with telegraf
 
 ### How to use (No script required :fire:)
-1. Add this to you telegraf.conf
-```
+1. Locate `vcgencmd` binary by executing shell command `/usr/bin/which vcgencmd`. Location may vary depending on `libraspberrypi-bin` package version.
+2. Before adding this to you _telegraf.conf_, replace `replace_with_vcgencmd_location` with real path returned in previous step. (ex.`/usr/bin/vcgencmd`).
+```shell
 [[inputs.file]] 
   files = ["/sys/class/thermal/thermal_zone0/temp"]
   name_override = "cpu_temperature"
@@ -11,15 +12,15 @@ Collect RaspberryPi CPU and GPU temperature with telegraf
   data_type = "integer"
   
 [[inputs.exec]]
-  commands = [ "/opt/vc/bin/vcgencmd measure_temp" ]
+  commands = [ "replace_with_vcgencmd_location measure_temp" ]
   name_override = "gpu_temperature"
   data_format = "grok"
   grok_patterns = ["%{NUMBER:value:float}"]
 
 ```
-2. Add telegraf user to video group ```sudo usermod -a -G video telegraf```
-3. ```sudo service telegraf stop;sudo service telegraf start```
-4. Run test ```telegraf -config /etc/telegraf/telegraf.conf -test```
+3. Add telegraf user to video group ```sudo usermod -a -G video telegraf```
+4. ```sudo service telegraf stop;sudo service telegraf start```
+5. Run test ```telegraf -config /etc/telegraf/telegraf.conf -test```
 
 ### How to use (Old way)
 1. Copy ```telegraf_pi_temp.sh``` to ```/usr/local/bin/telegraf_pi_temp.sh```
