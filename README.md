@@ -3,7 +3,7 @@ Collect RaspberryPi CPU and GPU temperature with telegraf
 
 ### How to use (No script required :fire:)
 1. Locate `vcgencmd` binary by executing shell command `/usr/bin/which vcgencmd`. Location may vary depending on `libraspberrypi-bin` package version.
-2. Before adding this to you _telegraf.conf_, replace `replace_with_vcgencmd_location` with real path returned in previous step. (ex.`/usr/bin/vcgencmd`).
+2. Before adding this to your _telegraf.conf_, replace `replace_with_vcgencmd_location` with real path returned in previous step. (ex.`/usr/bin/vcgencmd`).
 ```shell
 [[inputs.file]] 
   files = ["/sys/class/thermal/thermal_zone0/temp"]
